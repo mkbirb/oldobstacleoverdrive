@@ -57,6 +57,7 @@
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Jump.cs" />
     <Compile Include="Assets\Scripts\FastSpeed.cs" />
     <Compile Include="Assets\Scripts\KartController.cs" />
+    <Compile Include="Assets\Scripts\ObstacleFall.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Crouch.cs" />
     <Compile Include="Assets\Scripts\WaypointTrigger.cs" />
     <Compile Include="Assets\Scripts\SlowSpeed.cs" />

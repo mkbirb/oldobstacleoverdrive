@@ -22,6 +22,10 @@ public class KartController : MonoBehaviour
     // Controls the speed of the Kart
     private float speedMultiplier = 1f;
 
+    public float becomeUprightIn = 3f;
+
+    private bool isFlipping = false;
+
     void Start() {
         rb = GetComponent<Rigidbody>();
     }
@@ -49,6 +53,24 @@ public class KartController : MonoBehaviour
 
             rb.MoveRotation(rb.rotation * turnRotation);
         }
+
+
+        // Get the Kart to be upright, for when it is upside down
+        if (Vector3.Dot(transform.up, Vector3.up) < -0.7f && !isFlipping) {
+            StartCoroutine(BecomeUpright());
+        }
+    }
+
+    private IEnumerator BecomeUpright() {
+        isFlipping = true;
+
+        yield return new WaitForSeconds(becomeUprightIn);
+
+        Debug.Log("KartController: Became Upright");
+
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0f);
+
+        isFlipping = false;
     }
 
     public void SetSpeedMultiplier(float multiplier) {
