@@ -48,16 +48,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.37f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\Components\Crouch.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\Components\Zoom.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\FirstPersonMovement.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\FirstPersonLook.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\Components\Jump.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\FirstPersonAudio.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonLook.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Zoom.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\GroundCheck.cs" />
+    <Compile Include="Assets\Scripts\PlaySound.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Jump.cs" />
+    <Compile Include="Assets\Scripts\FastSpeed.cs" />
     <Compile Include="Assets\Scripts\KartController.cs" />
-    <Compile Include="Assets\Scripts\BoostRamp.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\Components\FirstPersonAudio.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Crouch.cs" />
     <Compile Include="Assets\Scripts\SlowSpeed.cs" />
-    <Compile Include="Assets\Extensions\Mini First Person Controller\Scripts\Components\GroundCheck.cs" />
+    <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

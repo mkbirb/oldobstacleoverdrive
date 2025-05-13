@@ -7,7 +7,7 @@ public class KartController : MonoBehaviour
     public float acceleration = 15f;
     
     // How fast the Kart would be able to turn
-    public float steering = 60f;
+    public float steering = 1.0f;
     public float maxSpeed = 20f;
 
     // Holds the Players Input
@@ -39,7 +39,10 @@ public class KartController : MonoBehaviour
 
         // Steering
         if (rb.linearVelocity.magnitude > 0.1f) {
-            float turn = steerInput * steering * Time.deltaTime;
+            // Provides sharper turns
+            float velocityFactor = Mathf.Clamp(rb.linearVelocity.magnitude, 0.5f, 2f);
+
+            float turn = steerInput * steering * Time.deltaTime * velocityFactor;
             
             // Apply the Rotation
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
