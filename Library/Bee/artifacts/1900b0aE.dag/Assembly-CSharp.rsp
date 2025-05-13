@@ -412,8 +412,10 @@
 "Assets/Prefabs/Extensions/Mini First Person Controller/Scripts/FirstPersonMovement.cs"
 "Assets/Scripts/FastSpeed.cs"
 "Assets/Scripts/KartController.cs"
+"Assets/Scripts/KartLapCounter.cs"
 "Assets/Scripts/PlaySound.cs"
 "Assets/Scripts/SlowSpeed.cs"
+"Assets/Scripts/WaypointTrigger.cs"
 -langversion:9.0
 /deterministic
 /optimize+

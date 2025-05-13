@@ -51,12 +51,14 @@
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\FirstPersonAudio.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonLook.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Zoom.cs" />
+    <Compile Include="Assets\Scripts\KartLapCounter.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\GroundCheck.cs" />
     <Compile Include="Assets\Scripts\PlaySound.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Jump.cs" />
     <Compile Include="Assets\Scripts\FastSpeed.cs" />
     <Compile Include="Assets\Scripts\KartController.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Crouch.cs" />
+    <Compile Include="Assets\Scripts\WaypointTrigger.cs" />
     <Compile Include="Assets\Scripts\SlowSpeed.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonMovement.cs" />
   </ItemGroup>
