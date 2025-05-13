@@ -18,7 +18,9 @@ public class KartController : MonoBehaviour
 
     // For going to the sides
     private float steerInput;
-    
+
+    // Controls the speed of the Kart
+    private float speedMultiplier = 1f;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -32,7 +34,7 @@ public class KartController : MonoBehaviour
         // Moving forward
         if (rb.linearVelocity.magnitude < maxSpeed) {
             // Where it is Negative Right, as the Model not imported right
-            rb.AddForce(-transform.right * moveInput * acceleration, ForceMode.Acceleration);
+            rb.AddForce(-transform.right * moveInput * acceleration * speedMultiplier, ForceMode.Acceleration);
         }
 
         // Steering
@@ -44,5 +46,9 @@ public class KartController : MonoBehaviour
 
             rb.MoveRotation(rb.rotation * turnRotation);
         }
+    }
+
+    public void SetSpeedMultiplier(float multiplier) {
+        speedMultiplier = multiplier;
     }
 }

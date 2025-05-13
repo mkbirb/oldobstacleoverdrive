@@ -410,7 +410,9 @@
 "Assets/Extensions/Mini First Person Controller/Scripts/Components/Zoom.cs"
 "Assets/Extensions/Mini First Person Controller/Scripts/FirstPersonLook.cs"
 "Assets/Extensions/Mini First Person Controller/Scripts/FirstPersonMovement.cs"
+"Assets/Scripts/BoostRamp.cs"
 "Assets/Scripts/KartController.cs"
+"Assets/Scripts/SlowSpeed.cs"
 -langversion:9.0
 /deterministic
 /optimize+
