@@ -54,6 +54,7 @@
     <Compile Include="Assets\Scripts\FastSpeed.cs" />
     <Compile Include="Assets\Scripts\KartController.cs" />
     <Compile Include="Assets\ito.cs" />
+    <Compile Include="Assets\Scripts\RandomObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\SlowSpeed.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonMovement.cs" />
     <Compile Include="Assets\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\FirstPersonAudio.cs" />

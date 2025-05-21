@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +9,10 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     // For the categorisation of the Hierachy
     public GameObject tracksPlaced;
+
+    public AudioSource snapSound;
+
+    public float snapDistance = 0.5f;
 
     public Camera birdsEyeCamera;
 
@@ -29,6 +34,9 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private static Color globallyOriginalColor;
 
     private bool isDraggingSelectedPiece = false;
+
+    // Prevents the Snap Sound from always playing
+    private bool hasSnapped = false;
 
     void Update()
     {
@@ -60,6 +68,7 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     globallySelectedPiece.transform.position = SnapToGrid(hit.point, 10.0f);
+                    PlaySnapSound();
                 }
             }
         }
@@ -68,7 +77,32 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (Input.GetMouseButtonUp(0))
         {
             isDraggingSelectedPiece = false;
+            hasSnapped = false;
         }
+    }
+
+    private bool IsCloseToAnotherTrack(GameObject currentTrack)
+    {
+        Collider currentCollider = currentTrack.GetComponentInChildren<Collider>();
+        if (currentCollider == null) return false;
+
+        foreach (Transform track in tracksPlaced.transform)
+        {
+            if (track.gameObject == currentTrack) continue;
+            Collider otherCollider = track.GetComponentInChildren<Collider>();
+
+            // Calculate based on Collider, rather than center of the gameobject
+            float distance = Vector3.Distance(currentCollider.ClosestPoint(otherCollider.transform.position), otherCollider.ClosestPoint(currentCollider.transform.position));
+            Debug.Log($"Checking distance to {track.name}: {distance}");
+            Debug.Log("Snaoka" + snapDistance);
+            if (distance < snapDistance)
+            {
+                Debug.Log($"DragMenu: Close to: {track.name}");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void OnSelectStraight()
@@ -127,6 +161,7 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             // Debug.Log("Ray hit: " + hit.collider.gameObject.name);
             // Get the Current Piece to appear where the Mouse is at
             currentPiece.transform.position = SnapToGrid(hit.point, 10.0f);
+            PlaySnapSound();
         }
     }
 
@@ -179,6 +214,17 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Color getGloballyOriginalColor()
     {
         return globallyOriginalColor;
+    }
+
+    private void PlaySnapSound()
+    {
+        if (IsCloseToAnotherTrack(globallySelectedPiece) && !hasSnapped)
+        {
+            // Play the Snap Sound, only when close to anotehr Track
+            snapSound.Play();
+            Debug.Log("DragMenu: Snap Sound played");
+            hasSnapped = true;
+        }
     }
 
 

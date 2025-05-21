@@ -10,23 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.314439
+      value: 0.9342958
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5.025055
+      value: 0.7850048
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.16
+      value: 6.2317047
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.34268564
+      value: 0.142
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.13
+      value: 119.20159
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f35a05b133b8f14a974d33b07588821, type: 3}
       propertyPath: m_LocalRotation.w
@@ -95,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowMultiplier: 0.5
+  slowDuration: 1
 --- !u!135 &902970802852076330
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -114,8 +119,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2508377
-  m_Center: {x: 0, y: -0.056521952, z: -0.23177342}
+  m_Radius: 0.27861485
+  m_Center: {x: 0.021770751, y: -0.056521893, z: -0.0014913216}
 --- !u!82 &5777636653457697790
 AudioSource:
   m_ObjectHideFlags: 0
