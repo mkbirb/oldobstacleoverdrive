@@ -139,6 +139,8 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         currentPiece = Instantiate(prefabCreate, tracksPlaced.transform);
 
+        // Apply the Minimap Layer to all of the children as well
+        SetLayerRecursively(currentPiece, LayerMask.NameToLayer("Minimap"));
         // Indicate the Current Piece Selected
         SelectPiece(currentPiece);
 
@@ -149,6 +151,20 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         else if (selectedTrackType == TrackType.Curved)
         {
             currentPiece.transform.localScale = new Vector3(280.0586f, 0.002253056f, 304.3666f);
+        }
+
+        // Ensures that the Piece is on the Ground
+        currentPiece.transform.position = new Vector3(currentPiece.transform.position.x, -0.4466856f, currentPiece.transform.position.z);
+    }
+
+    // Layers represented by Integer
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
         }
     }
 
