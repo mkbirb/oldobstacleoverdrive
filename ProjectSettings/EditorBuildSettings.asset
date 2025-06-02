@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WelcomeScreen.unity
     guid: 552a0fcc4cd87b947bdec171562cf07b
+  - enabled: 1
+    path: Assets/Scenes/ResultsScreen.unity
+    guid: dc6b11bafb27d1c49838fef4528a91ce
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 09bf9f106b39bf341b6c39b5d63ba81d, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: cfada7948f6b6df41be3d0c6b7315c3b, type: 2}

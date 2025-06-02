@@ -10,6 +10,7 @@ public class LoadScene : MonoBehaviour
         SampleScene,
         CharacterSelectScreen,
         WelcomeScreen,
+        ResultsScreen,
     }
 
     public SearchScene sceneToBeLoaded;

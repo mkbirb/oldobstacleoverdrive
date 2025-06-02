@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class KartLapCounter : MonoBehaviour
@@ -54,6 +55,9 @@ public class KartLapCounter : MonoBehaviour
 
                     // Stop the Timer
                     canvasObject.GetComponent<TimeTrialTimer>().StopTimer();
+
+                    // Also load the Results Screen
+                    SceneManager.LoadScene("ResultsScreen");
                 }
                 Debug.Log("KartLapCounter: Current Lap is " + currentLap);
             }

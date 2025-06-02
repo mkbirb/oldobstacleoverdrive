@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\MinimapIcon.cs" />
     <Compile Include="Assets\Scripts\SlowSpeed.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
+    <Compile Include="Assets\Scripts\DisplayResults.cs" />
     <Compile Include="Assets\Resources\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\FirstPersonAudio.cs" />
     <Compile Include="Assets\Resources\Prefabs\Extensions\Mini First Person Controller\Scripts\FirstPersonLook.cs" />
     <Compile Include="Assets\Scripts\CharacterSelectionManager.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\Resources\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\Crouch.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\TimeTrialTimerManager.cs" />
     <Compile Include="Assets\Resources\Prefabs\Extensions\Mini First Person Controller\Scripts\Components\GroundCheck.cs" />
     <Compile Include="Assets\Scripts\DragMenu.cs" />
     <Compile Include="Assets\Scripts\ShowUI.cs" />
