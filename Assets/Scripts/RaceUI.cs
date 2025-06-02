@@ -10,9 +10,16 @@ public class RaceUI : MonoBehaviour
     // Category Gameobject
     public GameObject raceUI;
 
+    public GameObject exploreUI;
+
+    public GameObject startRaceButton;
+
     public void StartRace()
     {
-        Debug.Log("StartRace: Race has started");
+        Debug.Log("RaceUI: Race has started");
+
+        exploreUI.SetActive(false);
+        startRaceButton.SetActive(false);
 
         // Get the Player to start behind the Starting Line
         player.transform.position = finishLine.transform.position - new Vector3(20, 0f, 0);
@@ -25,9 +32,21 @@ public class RaceUI : MonoBehaviour
 
         player.transform.rotation = Quaternion.Euler(0f, -160f, 0f);
 
-        raceUI.SetActive(true);
-
         // Start Race Countdown
         GetComponent<RaceCountdown>().StartRaceCountdown();
+
+        raceUI.SetActive(true);
+    }
+
+    public void EndRace()
+    {
+        Debug.Log("RaceUI: Race has ended!");
+
+        raceUI.gameObject.SetActive(false);
+
+        // Display Exploratory UI
+        exploreUI.SetActive(true);
+
+        startRaceButton.SetActive(true);
     }
 }

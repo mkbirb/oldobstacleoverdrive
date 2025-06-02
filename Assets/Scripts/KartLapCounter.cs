@@ -63,6 +63,11 @@ public class KartLapCounter : MonoBehaviour
             }
         }
     }
+
+    public Text getLapCounter()
+    {
+        return lapCounter;
+    }
     
     public void DisplayLapCounter()
     {

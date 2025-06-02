@@ -14,10 +14,17 @@ public class PlaySound: MonoBehaviour {
         }
     }
 
-    public IEnumerator playSound() {
+    public void TriggerSound()
+    {
+        StartCoroutine(playSound());
+    }
+
+    public IEnumerator playSound()
+    {
         sound.Play();
         Debug.Log("PlaySound: Sound is played ", sound);
         yield return new WaitForSeconds(duration);
+        Debug.Log("PlaySound: Sound is stopped ", sound);
         sound.Stop();
     }
 

@@ -26,8 +26,15 @@ public class ExplosionObstacle : MonoBehaviour
     {
         // The Explosion Effect is spawned
 
-        if (explosionEffect != null) {
+        if (explosionEffect != null)
+        {
             explosionObject = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+            // Hide the Bomb Asset
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.SetActive(false); 
+            }
         }
 
         // Gather all of the Colliders
@@ -65,6 +72,12 @@ public class ExplosionObstacle : MonoBehaviour
 
         newObstacle.GetComponent<Renderer>().enabled = true;
         newObstacle.GetComponent<Collider>().enabled = true;
+
+        // Ensure that the children in the new Gameobject is active
+        foreach (Transform child in newObstacle.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
 
         Destroy(gameObject);
     }

@@ -20,6 +20,12 @@ public class RaceCountdown : MonoBehaviour
 
     public GameObject countdownImage;
 
+    public Text lapCounterText;
+
+    public GameObject startRaceButton;
+
+    public GameObject endRaceButton;
+
     public void StartRaceCountdown()
     {
         // Set the Image for Countdown to be active
@@ -27,6 +33,10 @@ public class RaceCountdown : MonoBehaviour
 
         // Hide the Timer Text when Countdown Starts
         GetComponent<TimeTrialTimer>().getTimerText().gameObject.SetActive(false);
+
+        endRaceButton.gameObject.SetActive(false);
+
+        lapCounterText.gameObject.SetActive(false);
 
         StartCoroutine(Countdown());
     }
@@ -62,8 +72,14 @@ public class RaceCountdown : MonoBehaviour
 
         countdownImage.SetActive(false);
         
-        // Display Timer Countdown back
+        // Display Timer Countdown back and the lap Counter
         GetComponent<TimeTrialTimer>().getTimerText().gameObject.SetActive(true);
+
+        lapCounterText.gameObject.SetActive(true);
+
+        startRaceButton.SetActive(false);
+
+        endRaceButton.SetActive(true);
 
         GetComponent<TimeTrialTimer>().StartTimer();
     }

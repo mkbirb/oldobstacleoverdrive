@@ -16,6 +16,8 @@ public class ObstacleFall: MonoBehaviour {
 
     Quaternion startRot;
 
+    public AudioSource fallSound;
+
     void Start() {
         startPos = transform.position;
         startRot = transform.rotation;
@@ -29,6 +31,8 @@ public class ObstacleFall: MonoBehaviour {
             if (!isSlamming && !isReturning) {
                 // Only Trigger the Slamming Down, if the Obstacle is not currently slamming or returning
                 Debug.Log("ObstacleFall: Starting the Obstacle Fall");
+
+                fallSound.Play();
                 StartCoroutine(SlamDown());
             }
         }
@@ -50,6 +54,8 @@ public class ObstacleFall: MonoBehaviour {
         }
 
         transform.rotation = endRot;
+
+        fallSound.Stop();
 
         
         yield return new WaitForSeconds(downTime);
