@@ -1,16 +1,17 @@
-using System.Collections;
 using UnityEngine;
 
-public class WaypointTrigger: MonoBehaviour {
-    // Identifies which Waypoint the attached Gameobject is part off
+public class WaypointTrigger : MonoBehaviour
+{
     public int waypointIndex = 0;
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("IJK");
-        KartLapCounter counter = other.GetComponentInParent<KartLapCounter>();
+        Debug.Log($"WaypointTrigger [{waypointIndex}] hit by {other.name}");
 
-        if (counter != null) {
+        KartLapCounter counter = other.GetComponentInParent<KartLapCounter>();
+        if (counter != null)
+        {
+            Debug.Log($"WaypointTrigger: Reached waypoint {waypointIndex} by {other.name}");
             counter.ReachWaypoint(waypointIndex);
         }
     }

@@ -7,7 +7,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject prefabCreate;
     private GameObject currentPiece;
 
-    // For the categorisation of the Hierachy
     public GameObject tracksPlaced;
 
     public AudioSource snapSound;
@@ -26,7 +25,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public static DragMenu activeDragMenu; 
 
-
     public GameObject straightDragMenu;
     public GameObject curvedDragMenu;
 
@@ -34,8 +32,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private static Color globallyOriginalColor;
 
     private bool isDraggingSelectedPiece = false;
-
-    // Prevents the Snap Sound from always playing
     private bool hasSnapped = false;
 
     void Update()
@@ -46,34 +42,37 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 GameObject clickedObject = hit.collider.gameObject;
-                if (clickedObject.CompareTag("Track")) 
+
+                // Walk up the hierarchy to find the nearest parent with the "Track" tag
+                Transform current = clickedObject.transform;
+                while (current != null)
                 {
-                    SelectPiece(clickedObject);
-                    isDraggingSelectedPiece = true;
+                    if (current.CompareTag("Track"))
+                    {
+                        SelectPiece(current.gameObject);
+                        isDraggingSelectedPiece = true;
+                        break;
+                    }
+                    current = current.parent;
                 }
-                else
+
+                if (current == null)
                 {
                     isDraggingSelectedPiece = false;
                 }
             }
         }
 
-        // While holding mouse and a piece is selected & green
         if (Input.GetMouseButton(0) && isDraggingSelectedPiece && globallySelectedPiece != null)
         {
-            Renderer renderer = globallySelectedPiece.GetComponentInChildren<Renderer>();
-            if (renderer != null && renderer.material.color == Color.green)
+            Ray ray = birdsEyeCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Ray ray = birdsEyeCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    globallySelectedPiece.transform.position = SnapToGrid(hit.point, 10.0f);
-                    PlaySnapSound();
-                }
+                globallySelectedPiece.transform.position = SnapToGrid(hit.point, 10.0f);
+                PlaySnapSound();
             }
         }
 
-        // On release stop dragging
         if (Input.GetMouseButtonUp(0))
         {
             isDraggingSelectedPiece = false;
@@ -91,7 +90,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (track.gameObject == currentTrack) continue;
             Collider otherCollider = track.GetComponentInChildren<Collider>();
 
-            // Calculate based on Collider, rather than center of the gameobject
             float distance = Vector3.Distance(currentCollider.ClosestPoint(otherCollider.transform.position), otherCollider.ClosestPoint(currentCollider.transform.position));
             Debug.Log($"Checking distance to {track.name}: {distance}");
             Debug.Log("Snaoka" + snapDistance);
@@ -117,7 +115,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         curvedDragMenu.SetActive(true);
     }
 
-    // Allows the decision on which DragMenu to use for BuilderOptions
     void OnEnable()
     {
         activeDragMenu = this;
@@ -131,17 +128,11 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData pointerEventData)
     {
-        // Create a new prefab
         Debug.Log($"DragMenu: On Begin Drag, current piece deselecting is {currentPiece}");
-
-        // Deselect Piece before selecting piece
-        // DeselectPiece(currentPiece);
 
         currentPiece = Instantiate(prefabCreate, tracksPlaced.transform);
 
-        // Apply the Minimap Layer to all of the children as well
         SetLayerRecursively(currentPiece, LayerMask.NameToLayer("Minimap"));
-        // Indicate the Current Piece Selected
         SelectPiece(currentPiece);
 
         if (selectedTrackType == TrackType.Straight)
@@ -153,11 +144,9 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             currentPiece.transform.localScale = new Vector3(280.0586f, 0.002253056f, 304.3666f);
         }
 
-        // Ensures that the Piece is on the Ground
         currentPiece.transform.position = new Vector3(currentPiece.transform.position.x, -0.4466856f, currentPiece.transform.position.z);
     }
 
-    // Layers represented by Integer
     private void SetLayerRecursively(GameObject obj, int newLayer)
     {
         obj.layer = newLayer;
@@ -174,17 +163,12 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // Debug.Log("Ray hit: " + hit.collider.gameObject.name);
-            // Get the Current Piece to appear where the Mouse is at
             currentPiece.transform.position = SnapToGrid(hit.point, 10.0f);
             PlaySnapSound();
         }
     }
 
-    public void OnEndDrag(PointerEventData pointerEventData)
-    {
-    
-    }
+    public void OnEndDrag(PointerEventData pointerEventData) {}
 
     public static Vector3 SnapToGrid(Vector3 position, float gridSize)
     {
@@ -197,7 +181,6 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void SelectPiece(GameObject piece)
     {
-        // Deselect previous global piece
         if (globallySelectedPiece != null && globallySelectedPiece != piece)
         {
             Renderer oldRenderer = globallySelectedPiece.GetComponentInChildren<Renderer>();
@@ -208,11 +191,10 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         Renderer renderer = piece.GetComponentInChildren<Renderer>();
-        Debug.Log($"DragMenu: Selected Piece Renderer is {renderer}" );
+        Debug.Log($"DragMenu: Selected Piece Renderer is {renderer}");
         if (renderer != null)
         {
             Debug.Log("DragMenu: Selected Piece");
-            // Store the Original Colour
             if (globallySelectedPiece != piece)
             {
                 globallyOriginalColor = renderer.material.color;
@@ -236,18 +218,14 @@ public class DragMenu : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (IsCloseToAnotherTrack(globallySelectedPiece) && !hasSnapped)
         {
-            // Play the Snap Sound, only when close to anotehr Track
             snapSound.Play();
             Debug.Log("DragMenu: Snap Sound played");
             hasSnapped = true;
         }
     }
 
-
-
     public void setCurrentPieceRotation(float newRotation)
     {
         currentPiece.transform.rotation = Quaternion.Euler(0, newRotation, 0);
     }
-    
 }
