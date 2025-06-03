@@ -10,9 +10,12 @@ public class WaypointAssigner : MonoBehaviour
     {
         waypoints.Clear();
         HashSet<Transform> uniqueTracks = new HashSet<Transform>();
-        WaypointTrigger[] triggers = GameObject.FindObjectsOfType<WaypointTrigger>();
+        List<WaypointTrigger> triggers = new List<WaypointTrigger>(GameObject.FindObjectsOfType<WaypointTrigger>());
 
-        Debug.Log($"Found {triggers.Length} WaypointTriggers in scene.");
+        Debug.Log($"Found {triggers.Count} WaypointTriggers in scene.");
+
+        // Filter only those under tracksPlaced and remove duplicates by track
+        List<WaypointTrigger> valid = new List<WaypointTrigger>();
 
         foreach (var trigger in triggers)
         {
@@ -26,14 +29,26 @@ public class WaypointAssigner : MonoBehaviour
             if (!uniqueTracks.Contains(parentTrack))
             {
                 uniqueTracks.Add(parentTrack);
-                waypoints.Add(trigger);
-                trigger.waypointIndex = waypoints.Count - 1;
-                Debug.Log($"Waypoint #{trigger.waypointIndex} assigned to track '{parentTrack.name}' at {trigger.transform.position}");
+                valid.Add(trigger);
             }
         }
 
-        Debug.Log($"Waypoint Finalization Complete. Total unique waypoints assigned: {waypoints.Count}");
+        // ✅ Reverse the list to assign index 0 to the first placed track (furthest forward)
+        valid.Reverse();
+
+        for (int i = 0; i < valid.Count; i++)
+        {
+            valid[i].waypointIndex = i;
+            waypoints.Add(valid[i]);
+            Debug.Log($"✅ Waypoint #{i} assigned to track '{valid[i].transform.parent.name}' at {valid[i].transform.position}");
+        }
+
+        Debug.Log($"✅ Waypoint Finalization Complete. Total unique waypoints assigned: {waypoints.Count}");
     }
 
     public int GetWaypointCount() => waypoints.Count;
 }
+
+
+
+
