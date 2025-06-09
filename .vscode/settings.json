@@ -53,5 +53,5 @@
     },
     "dotnet.preferCSharpExtension": true,
     "oldobstacleoverdrive-main.sln=======dotnet.defaultSolution": "oldobstacleoverdrive.sln>>>>>>>2821af487783a1bd7e1ec76445fde27a2714d753",
-    "dotnet.defaultSolution": "obstacleoverdrive.sln"
+    "dotnet.defaultSolution": "obstacleoverdrive-1.sln"
 }
